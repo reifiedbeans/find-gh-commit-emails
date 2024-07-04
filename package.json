@@ -1,6 +1,7 @@
 {
   "name": "find-gh-commit-emails",
   "version": "0.0.0",
+  "license": "MIT",
   "type": "module",
   "files": [
     "index.js"
