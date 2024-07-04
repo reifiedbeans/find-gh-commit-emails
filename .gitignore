@@ -12,3 +12,6 @@ node_modules
 
 # ESLint
 .eslintcache
+
+# Build output
+/dist
