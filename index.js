@@ -3,21 +3,22 @@ import { program } from "commander";
 import { Octokit } from "octokit";
 
 program
-  .argument("username", "GitHub username to search emails for")
-  .option("--include-committer", "include committer email in results", false);
+  .name("find-gh-commit-emails")
+  .description(
+    "Search for emails used by a given GitHub user. " +
+      "Setting the GITHUB_TOKEN environment variable to a valid GitHub personal " +
+      "access token will enable searching in non-public repositories.",
+  )
+  .argument("username", "GitHub username to find emails for")
+  .option("--include-committer", "include committer email in results", false)
+  .configureHelp({ helpWidth: 80 })
+  .showHelpAfterError();
 program.parse(process.argv);
 
 const [username] = program.args;
 const { includeCommitter } = program.opts();
 
 const token = process.env["GITHUB_TOKEN"];
-if (!token) {
-  console.error(
-    "error: GITHUB_TOKEN environment variable not found; ensure GITHUB_TOKEN is set " +
-      "(generate a new token at https://github.com/settings/tokens)",
-  );
-  process.exit(1);
-}
 
 const github = new Octokit({ auth: token });
 
