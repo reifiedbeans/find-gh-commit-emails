@@ -1,12 +1,19 @@
 {
   "name": "find-gh-commit-emails",
   "version": "0.0.0",
+  "description": "Search for emails used by a given GitHub user",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/reifiedbeans/find-gh-commit-emails.git"
+  },
   "license": "MIT",
   "type": "module",
   "files": [
     "index.js"
   ],
-  "bin": "index.js",
+  "bin": {
+    "find-gh-commit-emails": "index.js"
+  },
   "engines": {
     "node": ">=18"
   },
