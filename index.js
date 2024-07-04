@@ -25,10 +25,7 @@ const commitData = await github.paginate("GET /search/commits", {
   q: `author:${username}`,
 });
 
-/**
- * Map of email to repositories
- * @type {Map<string, Set<string>>}
- */
+/** @type {Map<string, Set<string>>} */
 const emailMap = new Map();
 
 for (const entry of commitData) {
@@ -49,4 +46,12 @@ for (const entry of commitData) {
   }
 }
 
-console.log(emailMap);
+const json = JSON.stringify(
+  Object.fromEntries(emailMap),
+  (key, value) => {
+    if (value instanceof Set) return Array.from(value);
+    else return value;
+  },
+  2,
+);
+console.log(json);
