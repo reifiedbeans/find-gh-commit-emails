@@ -9,23 +9,26 @@
   "license": "MIT",
   "type": "module",
   "files": [
-    "index.js"
+    "dist"
   ],
+  "main": "dist/lib/index.js",
+  "types": "dist/lib/index.d.ts",
   "bin": {
-    "find-gh-commit-emails": "index.js"
+    "find-gh-commit-emails": "dist/bin/cli.js"
   },
   "engines": {
     "node": ">=18"
   },
   "scripts": {
+    "build": "tsup",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
-    "lint": "eslint --cache --max-warnings=0 .",
-    "lint:fix": "eslint --fix --cache --max-warnings=0 .",
-    "prepack": "npm-run-all lint format:check"
+    "lint": "tsc && eslint --cache --max-warnings=0 .",
+    "lint:fix": "tsc && eslint --fix --cache --max-warnings=0 .",
+    "prepack": "npm-run-all build lint format:check"
   },
   "dependencies": {
-    "commander": "^12.1.0",
+    "@commander-js/extra-typings": "^12.1.0",
     "octokit": "^4.0.2"
   },
   "devDependencies": {
@@ -36,7 +39,9 @@
     "eslint": "^8.57.0",
     "eslint-config-prettier": "^9.1.0",
     "npm-run-all": "^4.1.5",
-    "prettier": "^3.3.2"
+    "prettier": "^3.3.2",
+    "tsup": "^8.1.0",
+    "typescript": "^5.5.3"
   },
   "publishConfig": {
     "access": "public"
